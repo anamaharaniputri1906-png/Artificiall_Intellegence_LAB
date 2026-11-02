@@ -1,8 +1,8 @@
-"""Lab 3 of 8 — Search Engineering: Package, Tests, CLI, and Benchmark
+"""Lab 4 of 8 — Search Engineering: Package, Tests, CLI, and Benchmark
 Run this directly in VS Code: click "Run Python File" (top-right play button)
-or type `python lab03_search_engineering.py` in the integrated terminal.
+or type `python lab04_search_engineering.py` in the integrated terminal.
 
-Expected location: all_experiments/lab03_search_engineering.py
+Expected location: all_experiments/lab04_search_engineering.py
 (next to the utils/ folder, so `import utils` works)
 """
 import subprocess
@@ -22,7 +22,7 @@ pd.set_option("display.max_columns", None)
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 DATA = HERE
-RESULTS = ROOT / "results" / "lab03"
+RESULTS = ROOT / "results" / "lab04"
 RESULTS.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
@@ -141,4 +141,5 @@ plt.savefig(RESULTS / "benchmark_expansions.png", dpi=160)
 
 print("Saved:", sorted(p.name for p in RESULTS.iterdir()))
 print("Terminal command (from all_experiments): python -m pytest utils -q")
-print("\nLab 3 complete.")
+print("\nLab 4 complete.")
+
