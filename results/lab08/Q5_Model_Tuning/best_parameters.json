@@ -1,9 +1,0 @@
-{
-    "configuration": "unigram_bigram",
-    "ngram_range": [
-        1,
-        2
-    ],
-    "alpha": 0.3,
-    "validation_macro_f1": 0.6973265610143574
-}
