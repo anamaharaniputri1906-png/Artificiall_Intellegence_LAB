@@ -1,0 +1,3 @@
+configuration,ngram_range,train_documents,validation_documents,test_documents,number_of_features,train_matrix_nonzero
+unigram,"(1, 1)",9999,2143,2143,4672,84479
+unigram_bigram,"(1, 2)",9999,2143,2143,11850,116605
