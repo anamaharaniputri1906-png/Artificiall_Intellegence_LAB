@@ -21,3 +21,6 @@ results/archive_airline_sentiment/Q2_Data_Splitting/split.csv
 results/archive_airline_sentiment/Q6_Model_Evaluation/test_predictions.csv
 results/archive_airline_sentiment/Q6_Model_Evaluation/best_sentiment_model.joblib
 results/archive_airline_sentiment/Q7_Error_Analysis/most_confident_errors.csv
+
+# Generated Lab 7 OCR preprocessing outputs
+results/lab07/preprocessed/
