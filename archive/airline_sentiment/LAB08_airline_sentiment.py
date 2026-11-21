@@ -1,6 +1,6 @@
-﻿"""Lab 8: Airline Tweet Sentiment Classification.
+﻿"""Lab 7: Airline Tweet Sentiment Classification.
 Install: python -m pip install pandas numpy scikit-learn matplotlib
-Run: python lab08_airline_sentiment.py
+Run: python LAB07_airline_sentiment.py
 Default CSV: all_datasets/lab07-Tweets.csv
 """
 import argparse, re
@@ -32,7 +32,7 @@ ROOT = next(
 )
 
 DATA = ROOT / "all_datasets"
-RESULTS = ROOT / "results" / "lab08"
+RESULTS = ROOT / "results" / "LAB07"
 
 RESULTS.mkdir(parents=True, exist_ok=True)
 
@@ -92,7 +92,7 @@ def main():
     if not set(df.airline_sentiment).issubset(set(LABELS)):
         raise ValueError("Sentiment labels must be negative, neutral, positive.")
 
-    print("\\nQ1 â€” INSPECT, CLEAN AND DEDUPLICATE")
+    print("\\nQ1 - INSPECT, CLEAN AND DEDUPLICATE")
     print(f"Raw rows: {len(raw)} | exact duplicate texts: {exact_dupes}")
     print(f"Duplicates after normalisation: {normalised_dupes} | retained: {len(df)}")
     print(df.airline_sentiment.value_counts())
@@ -107,10 +107,10 @@ def main():
     split = np.full(len(df), "", dtype=object)
     split[tr], split[va], split[te] = "train", "validation", "test"
     pd.DataFrame({"tweet_id": df.tweet_id, "split": split}).to_csv(out/"split.csv", index=False)
-    print("\\nQ2 â€” SPLIT COUNTS", pd.Series(split).value_counts())
+    print("\\nQ2 - SPLIT COUNTS", pd.Series(split).value_counts())
     print(pd.crosstab(split, df.airline_sentiment))
 
-    print("\\nQ3 â€” VOCABULARY SIZES (FIT TRAIN ONLY)")
+    print("\\nQ3 - VOCABULARY SIZES (FIT TRAIN ONLY)")
     for ng in [(1,1), (1,2)]:
         v = vectorizer(ng); v.fit(df.clean_text.iloc[tr])
         print(f"{ng}: {len(v.vocabulary_):,} features")
@@ -119,7 +119,7 @@ def main():
     majority = df.airline_sentiment.iloc[tr].mode().iloc[0]
     yv = df.airline_sentiment.iloc[va]
     base_val = metrics("Majority baseline", yv, np.repeat(majority, len(va)))
-    print("\\nQ4 â€” BASELINE", majority, base_val)
+    print("\\nQ4 - BASELINE", majority, base_val)
 
     # Q5 tune only on validation macro F1.
     tuning = []
@@ -137,7 +137,7 @@ def main():
                 best = {"ngram": ng, "alpha": alpha, "score": score}
     tune_df = pd.DataFrame(tuning).sort_values("validation_macro_f1", ascending=False)
     tune_df.to_csv(out/"validation_results.csv", index=False)
-    print("\\nQ5 â€” VALIDATION GRID\\n", tune_df.to_string(index=False))
+    print("\\nQ5 - VALIDATION GRID\\n", tune_df.to_string(index=False))
     print("Selected:", best)
 
     # Q6: fit final vectorizer/model on training subset, test once.
@@ -153,7 +153,7 @@ def main():
         metrics("Majority baseline", yt, np.repeat(majority, len(te))),
         metrics("Multinomial NB", yt, pred)])
     result.to_csv(out/"metrics.csv", index=False)
-    print("\\nQ6 â€” TEST METRICS\\n", result.to_string(index=False))
+    print("\\nQ6 - TEST METRICS\\n", result.to_string(index=False))
     print("\\nPer-class report:\\n", classification_report(
         yt, pred, labels=LABELS, zero_division=0))
     pd.DataFrame(classification_report(yt, pred, labels=LABELS,
@@ -163,7 +163,7 @@ def main():
     fig, ax = plt.subplots(figsize=(7,6))
     ConfusionMatrixDisplay(cm, display_labels=LABELS).plot(
         ax=ax, cmap="Blues", values_format="d", colorbar=False)
-    ax.set_title("Multinomial Naive Bayes â€” Test Confusion Matrix")
+    ax.set_title("Multinomial Naive Bayes - Test Confusion Matrix")
     fig.tight_layout(); fig.savefig(out/"confusion_matrix.png", dpi=180); plt.close(fig)
     print("Confusion matrix (rows=true, columns=predicted):\\n",
           pd.DataFrame(cm, index=LABELS, columns=LABELS))
@@ -182,7 +182,7 @@ def main():
                 labels=LABELS, average="macro", zero_division=0)})
     airline_df = pd.DataFrame(airline)
     airline_df.to_csv(out/"per_airline_f1.csv", index=False)
-    print("\\nQ7 â€” AIRLINE SUBGROUP RESULTS\\n", airline_df.to_string(index=False))
+    print("\\nQ7 - AIRLINE SUBGROUP RESULTS\\n", airline_df.to_string(index=False))
 
     errors = test[test.airline_sentiment != test.predicted_sentiment].copy()
     errors = errors.sort_values(["airline_sentiment","confidence","tweet_id"],

@@ -19,8 +19,8 @@ from sklearn.metrics import (
 )
 
 BASE = Path(__file__).resolve().parent.parent
-DATA = BASE / "results" / "lab08" / "Q1_Data_Cleaning" / "cleaned_tweets.csv"
-RESULTS = BASE / "results" / "lab08"
+DATA = BASE / "results" / "LAB07" / "Q1_Data_Cleaning" / "cleaned_tweets.csv"
+RESULTS = BASE / "results" / "LAB07"
 
 FOLDERS = {
     "Q2": RESULTS / "Q2_Data_Splitting",
@@ -418,7 +418,7 @@ summary = {
     "test_errors": len(errors),
 }
 
-with open(RESULTS / "lab08_summary.json", "w") as f:
+with open(RESULTS / "LAB07_summary.json", "w") as f:
     json.dump(summary, f, indent=4)
 
 print("\n" + "=" * 65)
@@ -426,3 +426,4 @@ print("LAB 08 PIPELINE COMPLETED SUCCESSFULLY")
 print("=" * 65)
 print(json.dumps(summary, indent=4))
 print("\nAll outputs saved in:", RESULTS)
+

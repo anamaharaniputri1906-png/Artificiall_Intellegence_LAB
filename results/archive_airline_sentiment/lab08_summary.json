@@ -1,0 +1,17 @@
+﻿{
+    "dataset_rows": 14285,
+    "train_rows": 9999,
+    "validation_rows": 2143,
+    "test_rows": 2143,
+    "majority_class": "negative",
+    "best_configuration": "unigram_bigram",
+    "best_ngram_range": [
+        1,
+        2
+    ],
+    "best_alpha": 0.3,
+    "best_validation_macro_f1": 0.6973265610143574,
+    "test_accuracy": 0.7699486700886607,
+    "test_macro_f1": 0.6978290347421668,
+    "test_errors": 493
+}
